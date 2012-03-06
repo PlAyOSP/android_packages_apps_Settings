@@ -83,7 +83,6 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         } else {
             mCustomCarrierPref.setSummary(mCustomLabelText);
         }
-
     }
 
     int floatToIndex(float val) {

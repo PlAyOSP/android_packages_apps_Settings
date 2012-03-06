@@ -1,5 +1,9 @@
 /*
+<<<<<<< HEAD
  * Copyright (C) 2012 The CyanogenMod Project
+=======
+ * Copyright (C) 2011 The CyanogenMod Project
+>>>>>>> ae470e2... Settings : NavigationBar Customization
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -143,5 +147,4 @@ public class NavBar extends SettingsPreferenceFragment implements OnPreferenceCh
 		Settings.System.putInt(getActivity().getBaseContext().getContentResolver(),
 		        Settings.System.NAVIGATION_BAR_SHOW, isBarOn ? 1 : 0);
 	}
-
 }
