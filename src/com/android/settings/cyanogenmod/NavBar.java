@@ -143,5 +143,4 @@ public class NavBar extends SettingsPreferenceFragment implements OnPreferenceCh
 		Settings.System.putInt(getActivity().getBaseContext().getContentResolver(),
 		        Settings.System.NAVIGATION_BAR_SHOW, isBarOn ? 1 : 0);
 	}
-
 }

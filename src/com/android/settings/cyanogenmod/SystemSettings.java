@@ -47,6 +47,7 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private static final String KEY_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
     private static final String PREF_RECENT_APP_SWITCHER = "recent_app_switcher";
 
+
     private ListPreference mFontSizePref;
     private Preference mCustomCarrierPref;
     private ListPreference mRecentAppSwitcher;
@@ -83,7 +84,6 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         } else {
             mCustomCarrierPref.setSummary(mCustomLabelText);
         }
-
     }
 
     int floatToIndex(float val) {
