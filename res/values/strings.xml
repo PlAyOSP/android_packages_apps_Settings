@@ -16,6 +16,12 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+    <!-- PlAyOSP                       -->
+    <string name="custom_carrier_label_title">Custom carrier label</string>
+    <string name="carrier_warning">Warning: once changed, without a data wipe you cannot set the field back to the true operator!</string>
+    <string name="nav_bar_title">Navigation bar</string>
+    <string name="navigation_bar_height_title">Navigation bar height</string>
+    <string name="navigation_bar_width_title">Navigation bar width</string>
     <!-- String for ShortcutPickHelper -->
     <string name="picker_activities">Activities</string>
     <string name="select_custom_app_title">Select custom application</string>

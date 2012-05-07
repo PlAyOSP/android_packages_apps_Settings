@@ -20,6 +20,11 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceScreen
+        android:key="navigation_bar"
+        android:fragment="com.android.settings.cyanogenmod.NavBar"
+        android:title="@string/nav_bar_title" />
+
+    <PreferenceScreen
         android:key="notification_drawer"
         android:fragment="com.android.settings.cyanogenmod.PowerWidget"
         android:title="@string/notification_drawer_title" />
@@ -38,6 +43,10 @@
         android:key="wallpaper"
         android:title="@string/wallpaper_settings_title"
         android:fragment="com.android.settings.WallpaperTypeSettings" />
+
+    <Preference
+	android:key="custom_carrier_label"
+	android:title="@string/custom_carrier_label_title" />
 
     <ListPreference
         android:key="font_size"

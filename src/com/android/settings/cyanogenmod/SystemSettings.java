@@ -17,14 +17,20 @@
 package com.android.settings.cyanogenmod;
 
 import android.app.ActivityManagerNative;
+import android.app.AlertDialog;
 import android.content.res.Configuration;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
+import android.text.Spannable;
 import android.util.Log;
+import android.widget.EditText;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -36,8 +42,12 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_NOTIFICATION_DRAWER = "notification_drawer";
+    private static final String KEY_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
 
     private ListPreference mFontSizePref;
+    private Preference mCustomCarrierPref;
+
+    String mCustomLabelText = null;
 
     private final Configuration mCurConfig = new Configuration();
     
@@ -52,6 +62,18 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         if (Utils.isScreenLarge()) {
             getPreferenceScreen().removePreference(findPreference(KEY_NOTIFICATION_DRAWER));
         }
+	mCustomCarrierPref = findPreference(KEY_CUSTOM_CARRIER_LABEL);
+	updateCustomLabelTextSummary();
+    }
+    private void updateCustomLabelTextSummary() {
+        mCustomLabelText = Settings.System.getString(getActivity().getContentResolver(),
+                Settings.System.CUSTOM_CARRIER_LABEL);
+        if (mCustomLabelText == null) {
+            mCustomCarrierPref.setSummary(R.string.carrier_warning);
+        } else {
+            mCustomCarrierPref.setSummary(mCustomLabelText);
+        }
+
     }
 
     int floatToIndex(float val) {
@@ -88,7 +110,6 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
-
         updateState();
     }
 
@@ -112,6 +133,33 @@ public class SystemSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+	final String prefKey = preference.getKey();
+	if (KEY_CUSTOM_CARRIER_LABEL.equals(prefKey)) {
+            AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+            alert.setTitle(R.string.custom_carrier_label_title);
+            alert.setMessage("");
+
+            final EditText input = new EditText(getActivity());
+            input.setText(mCustomLabelText != null ? mCustomLabelText : "");
+            alert.setView(input);
+
+            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    String value = ((Spannable) input.getText()).toString();
+                    Settings.System.putString(getActivity().getContentResolver(),
+                            Settings.System.CUSTOM_CARRIER_LABEL, value);
+                    updateCustomLabelTextSummary();
+                }
+            });
+
+            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    
+                }
+            });
+
+            alert.show();
+        }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
