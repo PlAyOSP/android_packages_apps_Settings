@@ -122,7 +122,7 @@ public class NavBar extends SettingsPreferenceFragment implements OnPreferenceCh
 		            })
 		            .create()
 		            .show();*/
-
+		    restartSystemUI();
 		    return true;
 		}
 		 return super.onPreferenceTreeClick(preferenceScreen, preference);

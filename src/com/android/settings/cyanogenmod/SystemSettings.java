@@ -32,6 +32,8 @@ import android.text.Spannable;
 import android.util.Log;
 import android.widget.EditText;
 
+import java.io.IOException;
+
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -177,11 +179,18 @@ public class SystemSettings extends SettingsPreferenceFragment implements
             writeFontSizePreference(objValue);
         }
 	if (preference == mRecentAppSwitcher) {
-            int val = Integer.parseInt((String) newValue);
+            int val = Integer.parseInt((String) objValue);
             Settings.System.putInt(getActivity().getContentResolver(),
                 Settings.System.RECENT_APP_SWITCHER, val);
-            Helpers.restartSystemUI();
+            restartSystemUI();
          }
         return true;
     }
+         private void restartSystemUI() {
+        	try {
+            		Runtime.getRuntime().exec("pkill -TERM -f  com.android.systemui");
+        	} catch (IOException e) {
+                	e.printStackTrace();
+        	}
+    	}
 }
