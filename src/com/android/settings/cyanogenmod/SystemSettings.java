@@ -43,9 +43,11 @@ public class SystemSettings extends SettingsPreferenceFragment implements
     private static final String KEY_FONT_SIZE = "font_size";
     private static final String KEY_NOTIFICATION_DRAWER = "notification_drawer";
     private static final String KEY_CUSTOM_CARRIER_LABEL = "custom_carrier_label";
+    private static final String PREF_RECENT_APP_SWITCHER = "recent_app_switcher";
 
     private ListPreference mFontSizePref;
     private Preference mCustomCarrierPref;
+    private ListPreference mRecentAppSwitcher;
 
     String mCustomLabelText = null;
 
@@ -62,7 +64,13 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         if (Utils.isScreenLarge()) {
             getPreferenceScreen().removePreference(findPreference(KEY_NOTIFICATION_DRAWER));
         }
+
 	mCustomCarrierPref = findPreference(KEY_CUSTOM_CARRIER_LABEL);
+	mRecentAppSwitcher = (ListPreference) findPreference(PREF_RECENT_APP_SWITCHER);
+        mRecentAppSwitcher.setOnPreferenceChangeListener(this);
+        mRecentAppSwitcher.setValue(Integer.toString(Settings.System.getInt(getActivity()
+                .getContentResolver(), Settings.System.RECENT_APP_SWITCHER,
+                0)));
 	updateCustomLabelTextSummary();
     }
     private void updateCustomLabelTextSummary() {
@@ -168,7 +176,12 @@ public class SystemSettings extends SettingsPreferenceFragment implements
         if (KEY_FONT_SIZE.equals(key)) {
             writeFontSizePreference(objValue);
         }
-
+	if (preference == mRecentAppSwitcher) {
+            int val = Integer.parseInt((String) newValue);
+            Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.RECENT_APP_SWITCHER, val);
+            Helpers.restartSystemUI();
+         }
         return true;
     }
 }

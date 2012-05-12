@@ -49,6 +49,13 @@
 	android:title="@string/custom_carrier_label_title" />
 
     <ListPreference
+	android:key="recent_app_switcher"
+	android:title="@string/recent_app_switcher_title"
+	android:summary="@string/recent_app_switcher_summary"
+	android:entries="@array/recent_app_switcher_entries"
+        android:entryValues="@array/recent_app_switcher_values" />
+
+    <ListPreference
         android:key="font_size"
         android:title="@string/title_font_size"
         android:summary="@string/summary_font_size"

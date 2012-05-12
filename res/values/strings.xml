@@ -17,6 +17,8 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- PlAyOSP                       -->
+    <string name="recent_app_switcher_title">Recents window style</string>
+    <string name="recent_app_switcher_summary">Change the recents window style (requires UI restart)</string>
     <string name="custom_carrier_label_title">Custom carrier label</string>
     <string name="carrier_warning">Warning: once changed, without a data wipe you cannot set the field back to the true operator!</string>
     <string name="nav_bar_title">Navigation bar</string>

@@ -16,6 +16,18 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
+	<string-array name="recent_app_switcher_entries">
+		<item>Stock</item>
+		<item>WebOS style</item>
+		<item>Sense 4 style</item>
+	</string-array>
+
+	<string-array name="recent_app_switcher_values" translatable="false">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+	</string-array>
+
 	<string-array name="navigation_bar_width_entries">
 		<item>42 dp (default)</item>
 		<item>36 dp</item>

@@ -29,6 +29,8 @@ import android.provider.Settings;
 import android.text.Spannable;
 import android.widget.EditText;
 
+import java.io.IOException;
+
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -126,6 +128,13 @@ public class NavBar extends SettingsPreferenceFragment implements OnPreferenceCh
 		 return super.onPreferenceTreeClick(preferenceScreen, preference);
 
 	 }
+	private void restartSystemUI() {
+        	try {
+            		Runtime.getRuntime().exec("pkill -TERM -f  com.android.systemui");
+        	} catch (IOException e) {
+                	e.printStackTrace();
+        	}
+    	}
 	public void toggleBar() {
 		boolean isBarOn = Settings.System.getInt(getContentResolver(),
 		        Settings.System.NAVIGATION_BAR_SHOW, 1) == 1;
